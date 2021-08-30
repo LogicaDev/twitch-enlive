@@ -26,10 +26,10 @@ async def twitch(ctx, pseudotwitch):
         config = json.load(config_file)
 
     if pseudotwitch in config['watchlist']:
-        await ctx.send(f"Le streamer {pseudotwitch} à déja été ajouté")
+        await ctx.send(f"Le streamer {pseudotwitch} a déja été ajouté")
     else:
         config["watchlist"].append(pseudotwitch)
-        await ctx.send(f"Le streamer {pseudotwitch} à été ajouté")
+        await ctx.send(f"Le streamer {pseudotwitch} a été ajouté")
 
     with open("config.json", 'w') as f:
         json.dump(config, f, indent=2)
@@ -88,9 +88,9 @@ async def untwitch(ctx, pseudotwitch: str):
     else:
         if pseudotwitch in config['watchlist']:
             config['watchlist'].remove(pseudotwitch)
-            await ctx.send(f" Le streamer {pseudotwitch} à été supprimé")
+            await ctx.send(f" Le streamer {pseudotwitch} a été supprimé")
         else:
-            await ctx.send(f" Le streamer {pseudotwitch} n'est pas dans la list")
+            await ctx.send(f" Le streamer {pseudotwitch} n'est pas dans la liste")
 
     with open("config.json", 'w') as f:
         json.dump(config, f, indent=2)
@@ -151,8 +151,8 @@ async def streamers():
 
     users = get_streams(get_users(config["watchlist"]))
 
-    embedvar = discord.Embed(title="Streamer en live actuellement",
-                             description=f"Dernière actuallisation à : {current_time}", color=0x00ff00)
+    embedvar = discord.Embed(title="Streamers en live actuellement",
+                             description=f"Dernière actualisation à : {current_time}", color=0x00ff00)
     for user in users:
 
         user_name = user["user_name"]
@@ -181,12 +181,12 @@ async def streamers():
                     try:
                         await member.add_roles(role)
                     except:
-                        print("Une erreur c'est produite votre grade est sûrement au dessus de celui du bot")
+                        print("Une erreur s'est produite lors de l'ajout du grade. Votre grade est sûrement au dessus de celui du bot")
                 else:
                     try:
                         await member.remove_roles(role)
                     except:
-                        print("Une erreur c'est produite votre grade est sûrement au dessus de celui du bot")
+                        print("Une erreur s'est produite lors de la suppression du grade. Votre grade est sûrement au dessus de celui du bot")
 
 
 
